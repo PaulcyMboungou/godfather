@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ chosen_article.article_title }} {% endblock %}
+
+
+{% include 'base.html'%}
+{% block content %}
+
+
+<div id="bloc_page">
+
+<h3>{{ chosen_article.article_title }} <small>{{ chosen_article.pub_date }}</small></h3>
+<hr>
+<a><img src="{{ chosen_article.image.url }}" id="artimage"></a>
+<br /><br />
+<p>{{ chosen_article.article_content}}</p>
+<hr>
+<small id="signature">{{ chosen_article.author }}</small>
+</div>
+
+{% endblock %}

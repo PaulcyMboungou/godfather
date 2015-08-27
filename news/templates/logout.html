@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} COBSA | Logged Out {% endblock %}
+
+
+{% include 'base.html'%}
+{% block content %}
+
+
+<div id="bloc_page">
+<div id="homeheader">
+<h2>{{ message }}</h2>
+<p><a href="{% url 'news:login' %}">Login Again</a></p>
+
+</div>
+</div>
+
+{% endblock %}

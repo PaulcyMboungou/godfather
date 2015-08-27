@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %} COBSA | Registration {% endblock %}
+
+
+{% include 'base.html'%}
+{% block content %}
+
+
+<div id="bloc_page">
+<!-- <h2>{{ title }}</h2> -->
+<h3>{{ subtitle }}</h3>
+<hr>
+
+<form action="" method="Post">
+  {% csrf_token %}
+  <!-- {{ form.as_p }} -->
+  Username
+  <br />
+  <input type="text" name="username" placeholder="Username">
+  <br/><br/>
+  Password
+  <br />
+  <input type="password" name="password1" placeholder="password">
+  <br/><br/>
+  Confirm password
+  <br />
+  <input type="password" name="password2" placeholder="Confirm password">
+  <br/><br/>
+  Last name
+  <br />
+  <input type="text" name="lastname" placeholder="Lastname">
+  <br/><br/>
+  First name
+  <br />
+  <input type="text" name="firstname" placeholder="Firstname">
+  <br/><br/>
+  Email address
+  <br /> 
+  <input type="email" name="email" onclick="" placeholder="Email" required>
+  <br/><br/>
+ <!--  Matricule
+  <br /> 
+  <input type="text" id="number" name="matricule" onclick=" removeChosenNumber({{ unique_number }});" placeholder="Matricule No" required>
+  <br/><br/> -->
+  <!-- <select name="country">
+                 {%for liste in location_list%}
+					<option>{{liste.country}}</option>
+				{%endfor%}
+  </select>  -->
+	<input type="submit" class="btn btn-primary" value="register">
+</form>
+</div>
+
+{% endblock %}
