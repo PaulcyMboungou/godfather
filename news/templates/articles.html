@@ -13,9 +13,17 @@
 <hr>
 {% for article in list_of_articles %}
 
-<div>
-  <h4><a href="/get/{{ article.id }}">{{ article.article_title }}</a></h4><small></small>
-  <p>{{ article.article_content|lower|truncatewords:200 }}</p>
+<div class="media">
+  <div class="media-left">
+    <a href="/get/{{ article.id }}">
+      <img class="media-object" src="{{ chosen_article.image.url }}" alt="...">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><a href="/get/{{ article.id }}">{{ article.article_title }}</a></h4><!-- <small>{{ chosen_article.pub_date }}</small> -->
+    <p>{{ article.article_content|lower|truncatewords:100 }}</p>
+    {{ article.likes }} people like this article
+  </div>
 </div>
 
 {% endfor %}

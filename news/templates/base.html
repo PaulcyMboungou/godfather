@@ -9,14 +9,25 @@
   <link rel="stylesheet" type="" href="{% static "news/css/bootstrap.min.css" %}">
   <link rel="stylesheet" type="" href="{% static "news/css/bootstrap.icon-large.css" %}">
   <link rel="stylesheet" type="" href="{% static "news/css/bootstrap.icon-large.min.css" %}">
-  <script type="text/javascript" src="{% static "news/js/farel.js" %}"></script>
   <script type="text/javascript" src="{% static "news/js/jquery.js" %}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="{% static "news/js/farel.js" %}"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script type="text/javascript" src="{% static "news/js/bootstrap.js" %}"></script>
 </head>
-<body>
-<img src="{% static "news/images/ban.jpg"%}" id="header">
-<nav class="navbar navbar-inverse">
+<body style="background-color:#E6E6E6;">
+<div class="">
+
+<div class="nav_top">
+  <ul>
+     <li><a href="#"><span class="social social-facebook"></span></a></li>
+     <li><a href="#"><span class="social social-google-plus"></span></a></li>
+  </ul>
+  <!-- <img src="{% static "news/images/ban.jpg"%}" id="header"> -->
+</div>
+
+
+<div class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -54,30 +65,27 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
-</nav>
-
-
-<hr>
+</div>
 <!-- <form action="" method="GET" id="signature">
 	<input type="text" name="search" placeholder="search">
 	<input type="button" value="search">
 </form> -->
-<div id="bloc_page">
-	<ul>
-	    <li><a href="{% url 'news:home' %}"> Home </a></li>
-		<li><a href="{% url 'news:articles' %}"> News / Actuality </a></li>
-		<li><a href="#"> COBSA </a></li>
-		<li><a href="{% url 'news:media' %}"> Media </a></li>
-		<li><a href="#"> Links </a></li>
-		<li><a href="#"> Contacts </a></li>
+<div id="menu">
+ <nav>
+	<ul class="showing">
+	  <a href="{% url 'news:home' %}"><li><span class="glyphicons glyphicons-home"></span> Home </li></a>
+		<a href="{% url 'news:articles' %}"><li><span class="glyphicons glyphicons-newspaper">📰</span> News / Actuality </li></a>
+		<a href="{% url 'news:media' %}"><li> Media </li></a>
+		<a href="#"><li> Contacts </li></a>
 	</ul>
+  <div class="handle">Menu</div>
+ </nav>
 </div>
-<hr>
 {% block content %}
 
 {% endblock %}
-<!-- <footer>
-      <nav class="navbar navbar-inverse navbar-static-bottom">
+<div id="bloc_page">
+<hr>
          <div class="container">
              <div class="row">
                  <div class="col-lg-2">
@@ -96,9 +104,16 @@
       
                  </div>
              </div>
-         </div>
-        </nav>
-     </footer> -->
+</div>
+     <script>
+         $('.handle').on('click', function(){
+            // console.log('Farel')
+               $('nav ul').toggleClass('showing');
+               // console.log('Farel')
+           });
+     </script>
+
+     </div>
 
 </body>
 </html>

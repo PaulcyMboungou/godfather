@@ -44,7 +44,7 @@ INSTALLED_APPS = (
     'embed_video',
     # 'registration',
     'news',
-    # 'south',
+    'actstream'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,6 +95,7 @@ DATABASES = {
 # 'default': 'south.db.sqlite3'}
 
 AUTH_USER_MODEL = 'news.MyUser'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 
 
 # Internationalization
@@ -120,7 +121,16 @@ MEDIA_URL = '/media/'
 
 #Django registration Redux Settings
 ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_AUTO_LOGIN = False
+REGISTRATION_AUTO_LOGIN = True
+
+#Django activity stream settings
+ACTSTREAM_SETTINGS = {
+    'MANAGER': 'actstream.managers.ActionManager',
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': True,
+    'GFK_FETCH_DEPTH': 1,
+}
 
 EMBED_VIDEO_BACKENDS = (
     'embed_video.backends.YoutubeBackend',

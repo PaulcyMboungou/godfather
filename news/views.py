@@ -1,4 +1,5 @@
 import json
+from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -24,29 +25,35 @@ def home(request):
 	return HttpResponse(template.render(context))
 
 def login(request):
+	error = "Your entered details seems invalid , Please try again !"
+	message = "Welcome back ! Login and Discuss with Your Congolese's Brothers"
+	
 	if request.method == 'POST':
-		email = request.POST.get('email', '')
+		username = request.POST.get('username', '')
 		password = request.POST.get('password', '')
-		user = auth.authenticate(email=email , password=password)
+		user = auth.authenticate(username=username , password=password)
 
 		if user is not None:
 			auth.login(request, user)
-			return HttpResponseRedirect('/account')
+			return HttpResponseRedirect('/account/')
 		else:
-			return HttpResponse('invalid details. Try again')
+			return HttpResponse('There was an issue with your account')
+	else:
 
-	message = "Welcome back ! Login and Discuss with Your Congolese's Brothers"
-	template = loader.get_template('login.html')
-	context = RequestContext(request, {
-        'message':message
- 		})
+		template = loader.get_template('login.html')
+		context = RequestContext(request, {
+			'message':message,
+			'error':error
+			})
 
-	return HttpResponse(template.render(context))
+		return HttpResponse(template.render(context))
 
 def loggedin(request):
+	message = "My Actualities !"
 	template = loader.get_template('loggedin.html')
 	context = RequestContext(request, {
- 		})
+		'message':message
+		})
 
 	return HttpResponse(template.render(context))
 	
@@ -63,6 +70,8 @@ def register(request):
 		username = request.POST.get('username', '')
 		lastname = request.POST.get('lastname', '')
 		firstname = request.POST.get('firstname', '')
+		password1 = request.POST.get('password1', '')
+		password2 = request.POST.get('password2', '')
 		email = request.POST.get('email', '')
 		# matricule = [request.POST.get('matricule')]
 
@@ -70,20 +79,25 @@ def register(request):
 		# 	error = "The matricule your entered is not valid"
 		# else:
 		# 	error = "valid"
-
-		user = MyUser.objects.create(
-		username = username,
-			first_name = firstname,
-			last_name = lastname,
-			email = email,
-			# MatriculeNo = matricule
-			# location = country
-		  )
-
-		if user is not None:
-			return HttpResponseRedirect('POST Success')
+		if password1 != password2:
+			raise ValueError('Passwords dont match')
 		else:
-			return HttpResponseRedirect('Failed to Register !')
+			# password.set_password(request.POST.get['password2', ''])
+
+			user = MyUser.objects.create(
+			username = username,
+			password= password2,
+				first_name = firstname,
+				last_name = lastname,
+				email = email,
+				# MatriculeNo = matricule
+				# location = country
+			  )
+
+			if user is not None:
+				return HttpResponseRedirect('/account/register_success')
+			else:
+				return HttpResponseRedirect('Failed to Register !')
 
 	# else:
 	# 	return HttpResponseRedirect('/')
@@ -103,17 +117,26 @@ def register(request):
 
 	return HttpResponse(template.render(context))
 
+def register_success(request):
+	message = " You have registered successfully ! Please click on link below to activate your account !"
+	template = loader.get_template('register_success.html')
+	context = RequestContext(request, {
+		'message':message
+	})
+
+	return HttpResponse(template.render(context))
+
 def logout(request):
 	message = "You have successfully logged out !"
 	auth.logout(request)
 	template = loader.get_template('logout.html')
 	context = RequestContext(request, {
-         'message': message
+		 'message': message
 		})
 	return HttpResponse(template.render(context))
 
 def articles(request):
-	title = 'Breaking News'
+	title = 'News'
 	list_of_articles = Article.objects.all()
 	template = loader.get_template('articles.html')
 	context = RequestContext(request, {
@@ -125,12 +148,25 @@ def articles(request):
 
 def article(request, article_id=1):
 	chosen_article = Article.objects.get(id=article_id)
-	template = loader.get_template('article.html')
-	context = RequestContext(request, {
-		'chosen_article': chosen_article
-		})
 
-	return HttpResponse(template.render(context))
+	if request.method == 'POST':
+		username = request.POST.get('username', '')
+		password = request.POST.get('password', '')
+		user = auth.authenticate(username=username , password=password)
+
+		if user is not None:
+			auth.login(request, user)
+			return HttpResponseRedirect('/')
+		else:
+			return HttpResponse('There was an issue with your account')
+	else:
+
+		template = loader.get_template('article.html')
+		context = RequestContext(request, {
+			'chosen_article': chosen_article
+			})
+
+		return HttpResponse(template.render(context))
 
 def media(request):
 	template = loader.get_template('media.html')

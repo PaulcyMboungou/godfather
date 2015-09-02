@@ -23,48 +23,47 @@ class MatriculeNo(models.Model):
 
 
 class MyUserManager(BaseUserManager):
-	def create_user(self, email, password=None):
-		if not email:
-			raise ValueError('Users must have an email address')
+	use_in_migrations = True
 
+	def create_user(self, username, email=None, password=None):
+		if not username:
+			raise ValueError('The given username must be set')
+		email = self.normalize_email(email)
 		user = self.model(
-			email=MyUserManager.normalize_email(email),
-			# username=username,
+			username = username,
+			email=email
 		)
 
 		user.set_password(password)
 		user.save(using=self._db)
 		return user
 
-	def create_superuser(self, email, password):
-		user = self.create_user(email,
-			# username=username,
+	def create_superuser(self, username, email, password):
+		user = self.create_user(username, email,
 			password=password,
 		)
 		user.is_admin = True
-		user.is_staff = True
-		user.is_superuser = True
+		# user.is_staff = True
+		# user.is_superuser = True
 		user.save(using=self._db)
 		return user
-
-	def get_by_natural_key(self, username):
-		return self.get(**{self.model.USERNAME_FIELD: username})
-
 
 class MyUser(AbstractBaseUser):
 	"""
 	Custom user class.
 	"""
-	username = models.CharField('Username', max_length=100, blank=True, unique=True)
-	email = models.EmailField('email address', unique=True, db_index=True)
+	username = models.CharField('Username', max_length=100, unique=True, db_index=True)
+	email = models.EmailField('email address',)
 	is_active = models.BooleanField(default=True)
+	is_staff = models.BooleanField(default=True)
 	is_admin = models.BooleanField(default=False)
 	last_name = models.CharField(max_length=50, blank=True)
 	first_name = models.CharField(max_length=50 , blank=True)
 	joined = models.DateTimeField(auto_now_add=True , null=True)
 	MatriculeNo = models.OneToOneField(MatriculeNo, blank=True, null=True)
 
-	USERNAME_FIELD = 'email'
+	USERNAME_FIELD = 'username'
+	REQUIRED_FIELDS = ['email']
 
 	objects = MyUserManager()
 
@@ -99,6 +98,12 @@ class MyUser(AbstractBaseUser):
 		"""
 		return True
 
+class Comment(models.Model):
+	comment = models.TextField()
+
+# class Like(models.Model):
+# 	likes = models.IntegerField()
+
 
 class Article(models.Model):
 	article_title = models.CharField(max_length=500)
@@ -106,9 +111,10 @@ class Article(models.Model):
 	article_content = models.TextField(blank=True)
 	pub_date = models.DateTimeField('date published')
 	# image = models.ImageField(upload_to="news/images")
-	likes = models.BooleanField(default=False)
+	likes = models.IntegerField(blank=True, default=0)
 	author = models.CharField(max_length=50, blank=True)
 	image = models.ImageField(upload_to='Images/%Y/%m/%d', blank=True)
+	comment = models.ManyToManyField(Comment)
 	video = EmbedVideoField(blank=True)
 
 	def __str__(self):
