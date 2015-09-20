@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.models import UserManager
+from django.contrib.auth.hashers import (
+	check_password, is_password_usable, make_password,
+)
 
 # from .forms import SignupForm
 
@@ -86,7 +89,7 @@ def register(request):
 
 			user = MyUser.objects.create(
 			username = username,
-			password= password2,
+			password= make_password(password2),
 				first_name = firstname,
 				last_name = lastname,
 				email = email,

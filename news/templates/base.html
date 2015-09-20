@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="" href="{% static "news/css/home.css" %}">
 	<link rel="stylesheet" type="" href="{% static "news/css/bootstrap.css" %}">
   <link rel="stylesheet" type="" href="{% static "news/css/bootstrap.min.css" %}">
+  <link rel="stylesheet" type="" href="{% static "news/css/font-awesome.min.css" %}">
   <link rel="stylesheet" type="" href="{% static "news/css/bootstrap.icon-large.css" %}">
   <link rel="stylesheet" type="" href="{% static "news/css/bootstrap.icon-large.min.css" %}">
   <script type="text/javascript" src="{% static "news/js/jquery.js" %}"></script>
@@ -16,15 +17,15 @@
   <script type="text/javascript" src="{% static "news/js/bootstrap.js" %}"></script>
 </head>
 <body style="background-color:#E6E6E6;">
-<div class="">
+<div id="head_bloc_page">
 
 <div class="nav_top">
   <ul>
-     <li><a href="#"><span class="social social-facebook"></span></a></li>
-     <li><a href="#"><span class="social social-google-plus"></span></a></li>
+     <a href="#"><li><i class="fa fa-facebook-official fa-2x"></i></li></a>
+     <a href="#"><li><i class="fa fa-google-plus-square fa-2x"></i></li></a>
   </ul>
-  <!-- <img src="{% static "news/images/ban.jpg"%}" id="header"> -->
 </div>
+<!-- <img src="{% static "news/images/ban.jpg"%}" id="header"> -->
 
 
 <div class="navbar navbar-inverse">
@@ -43,9 +44,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
       {% if request.user.is_authenticated %}
-      <li><a href=""><span class="glyphicons glyphicons-group"></span></a></li>
-      <li><a href=""><span class="glyphicons glyphicons-envelope">✉</span></a></li>
-      <li><a href=""><span class="glyphicons glyphicons-user"></span></a></li>
+      <li><a href=""><i class="fa fa-users"></i></a></li>
+      <li><a href=""><i class="fa fa-envelope-o"></i></a></li>
+      <li><a href=""><i class="fa fa-user"></i></a></li>
       <li><a href="{% url 'news:loggedin'%}">{{ request.user.username }}</a></li>
       <li><a href="{% url 'news:logout'%}">Logout</a></li>
        {% else %}
@@ -66,6 +67,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </div>
+</div>
 <!-- <form action="" method="GET" id="signature">
 	<input type="text" name="search" placeholder="search">
 	<input type="button" value="search">
@@ -73,8 +75,8 @@
 <div id="menu">
  <nav>
 	<ul class="showing">
-	  <a href="{% url 'news:home' %}"><li><span class="glyphicons glyphicons-home"></span> Home </li></a>
-		<a href="{% url 'news:articles' %}"><li><span class="glyphicons glyphicons-newspaper">📰</span> News / Actuality </li></a>
+	  <a href="{% url 'news:home' %}"><li><i class="fa fa-home"></i> Home </li></a>
+		<a href="{% url 'news:articles' %}"><li><i class="fa fa-newspaper-o"></i> News / Actuality </li></a>
 		<a href="{% url 'news:media' %}"><li> Media </li></a>
 		<a href="#"><li> Contacts </li></a>
 	</ul>
@@ -86,10 +88,11 @@
 {% endblock %}
 <div id="bloc_page">
 <hr>
-         <div class="container">
+         
              <div class="row">
                  <div class="col-lg-2">
-                     <h5>Copyright &copy; 2015</h5>
+                     <h4>Copyright &copy; 2015</h4>
+                     <p></p>
                  </div>
 
                  <div class="col-lg-4">
@@ -97,7 +100,7 @@
                  </div>
 
                  <div class="col-lg-2">
-                    <h5>Contact Us</h5>
+                    <h4>Contact Us</h4>
                  </div>
 
                  <div class="col-lg-4">
@@ -105,15 +108,7 @@
                  </div>
              </div>
 </div>
-     <script>
-         $('.handle').on('click', function(){
-            // console.log('Farel')
-               $('nav ul').toggleClass('showing');
-               // console.log('Farel')
-           });
-     </script>
 
-     </div>
 
 </body>
 </html>

@@ -22,7 +22,11 @@
   <div class="media-body">
     <h4 class="media-heading"><a href="/get/{{ article.id }}">{{ article.article_title }}</a></h4><!-- <small>{{ chosen_article.pub_date }}</small> -->
     <p>{{ article.article_content|lower|truncatewords:100 }}</p>
-    {{ article.likes }} people like this article
+    <div id="like_count_out">
+			   <p> {{ article.likes }} <i class="fa fa-thumbs-up"></i></p>
+			   <p> {{ article.comment_set.count }} <i class="fa fa-comments-o"></i></p>
+			   <p> {{ article.share }} <i class="fa fa-share"></i></p>   
+			  </div>
   </div>
 </div>
 

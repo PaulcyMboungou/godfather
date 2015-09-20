@@ -25,15 +25,20 @@
 			<div id="signature">{{ chosen_article.author }}</div>
 			<hr>
 			<div class="feedback">
+			  <div id="like_count">
+			    <i class="fa fa-thumbs-up"></i> 
+			      {{ article.likes }} people like this article 
+			  </div>
+			  <br/>
 				<ul>
-				{% if request.user.is_authenticated %}
-					<a href="#"><li> Like </li></a>
-					<a href="#"><li> Comment </li></a>
-					<a href="#"><li> Share </li></a>
+				{% if user.is_authenticated %}
+					<a id="like"><li> Like <i class="fa fa-thumbs-up"></i></li></a>
+					<a id="comment"><li> Comment <i class="fa fa-comments-o"></i></li></a>
+					<a ><li> Share <i class="fa fa-share"></i></li></a>
 					{% else %}
-					<a href="#" data-toggle="modal" data-target="#myModal-1"><li> Like </li></a>
-					<a href="#" data-toggle="modal" data-target="#myModal-1"><li> Comment </li></a>
-					<a href="#" data-toggle="modal" data-target="#myModal-1"><li> Share </li></a>
+					<a data-toggle="modal" data-target="#myModal-1"><li> Like </li></a>
+					<a data-toggle="modal" data-target="#myModal-1"><li> Comment </li></a>
+					<a data-toggle="modal" data-target="#myModal-1"><li> Share </li></a>
 
 						<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 							<div class="modal-dialog" role="document">
@@ -67,6 +72,13 @@
 						</div>
 					{% endif %}
 				</ul>
+				<div id="comment-box">
+					  <hr/>
+
+					  <textarea placeholder="Leave a comment...">	</textarea>
+					  <br/>
+					  <button> Comment </button>
+					</div>
 				<hr>
 			</div>
 
@@ -79,7 +91,6 @@
 
 
 </div><!--end class panel-->
-
 </div>
 
 {% endblock %}

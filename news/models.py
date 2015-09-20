@@ -71,8 +71,8 @@ class MyUser(AbstractBaseUser):
 		return self.username
 
 	def get_full_name(self):
-		fullname = self.first_name+" "+self.last_name
-		return self.fullname
+		full_name = self.first_name+" "+self.last_name
+		return self.full_name
 
 	def get_short_name(self):
 		return self.first_name

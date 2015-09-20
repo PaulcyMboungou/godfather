@@ -1,3 +1,8 @@
+body{
+	width: 100%;
+	min-width: 50%;
+}
+
 p{
 	font-size: 15px;
 }
@@ -24,12 +29,16 @@ p{
 }
 
 #menu{
-	width:75%;
+	width: 75%;
+	margin: 0 auto;
+}
+#head_bloc_page{
+	width: 75%;
 	margin: 0 auto;
 }
 
 #bloc_page{
-	width:75%;
+	width: 75%;
 	margin: 0 auto;
 	padding: 20px;
 	background-color: white;
@@ -50,6 +59,10 @@ p{
 
 .feedback ul li:hover{
 	background-color:#4D4D4D;
+}
+
+.feedback a{
+	cursor:pointer;
 }
 
 nav ul{
@@ -127,13 +140,22 @@ small{
 	}
 }
 
+.row{
+	background-color:#666666;
+	color: white;
+}
+
+.row a{
+	color: white;
+}
+
 #row{
 	width: 100%;
 }
 
 #main_news{
 	width: 55%;
-	height: 250px;
+	height: 400px;
 	padding: 20px;
 	border: 1px solid grey;
 	float: left;
@@ -149,7 +171,7 @@ small{
 
 #newstime{
 	width: 40%;
-	height: 250px;
+	height: 400px;
 	padding: 20px;
 	border: 1px solid grey;
 	overflow: hidden;
@@ -157,7 +179,7 @@ small{
 
 #annoucement{
 	width: 47.5%;
-	height: 200px;
+	height: 300px;
 	padding: 20px;
 	border: 1px solid grey;
 	float: left;
@@ -166,7 +188,7 @@ small{
 
 #media{
 	width: 47.5%;
-	height: 200px;
+	height: 300px;
 	border: 1px solid grey;
 	overflow: hidden;
 }
@@ -182,4 +204,54 @@ small{
 	padding: 10px;
 	font-size: 20px;
 	color: white;
+}
+
+#like_count{
+	color: #666666;
+	font-style: italic;
+	font-size: 15px;
+	font-family: Arial;
+	/*display: none;*/
+}
+
+#like_count_out{
+	color: #666666;
+	font-style: italic;
+	font-size: 15px;
+	font-family: Arial;
+}
+
+#like_count_out p{
+    display: inline-block;
+    padding: 10px;
+}
+
+#comment-box{
+    width: 100%;
+    display: none;
+}
+
+textarea{
+	width: 50%;
+	height: 100px;
+	font-size: 20px;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	padding: 5px;
+    color:   #666666;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   padding: 5px;
+   color:   #666666;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+	padding: 5px;
+   color:   #666666;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+	padding: 5px;
+   color:   #666666;
 }

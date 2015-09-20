@@ -4,12 +4,30 @@ function removeChosenNumber(MatriculeNo) {
    MatriculeNo.splice(MatriculeNo.indexOf(num), 1);
 }
 
-// $('.handle').on('click', function(){
-//             // console.log('Farel')
-//                $('nav ul').toggleClass('showing');
-//                // console.log('Farel')
-//            });
+$(document).ready(function(){
+	$('.handle').on('click', function(){
+        // console.log('Farel')
+           $('nav ul').toggleClass('showing');
+           // console.log('Farel')
+       });
 
-// function autocomplete(MatriculeNo){
-//   loadAutocomplete("#number", MatriculeNo);
-// }
+});
+
+$(document).ready(function(){
+	$('#comment').click(function(){
+		$('#comment-box').css("display", "block");
+	});
+	// $('#comment').click(function(){
+	// 	$('#comment-box').css("display", "none");
+	// });
+
+});
+
+function Comment()
+{
+
+}
+
+
+
+
